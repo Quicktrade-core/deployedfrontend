@@ -1,0 +1,1 @@
+# quicktrade-frontend

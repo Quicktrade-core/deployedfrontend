@@ -1,0 +1,2629 @@
+====================================================================================================
+COMBINED OUTPUT FROM SRC FOLDER
+Generated: 2026-09-22 06:47:17
+Source: C:\Users\uchime victor\Desktop\quicktrade-frontend-main\quicktrade-frontend-main\src
+Total files: 39
+====================================================================================================
+
+====================================================================================================
+📁 FOLDER: src
+📄 FILE: App.jsx
+📌 PATH: src/App.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 2.6 KB
+====================================================================================================
+
+import { createContext, useEffect, useState } from "react"
+import { createBrowserRouter, RouterProvider } from "react-router"
+import RootLayout from "./rootLayout"
+import HomePage from "./pages/homePage"
+import CartPage from "./pages/cartPage"
+import AccountPage from "./pages/accountPage"
+import NotfoundPage from "./pages/notfoundPage"
+import LoginPage from "./pages/loginPage"
+import VideosPage from "./pages/videosPage"
+import ProductPage from "./pages/productPage"
+import CheckoutPage from "./pages/checkoutPage"
+import NotificationsPage from "./pages/notificationsPage"
+import OrdersPage from "./pages/ordersPage"
+import OrderPage from "./pages/orderPage"
+import ProfilePage from "./pages/profilePage"
+import SecurityPage from "./pages/securityPage"
+import SettingsPage from "./pages/settingsPage"
+import SellerPage from "./pages/sellerPage"
+//import VideoPage from "./pages/videoPage"
+import Products from "./components/products"
+import Reels from "./components/reels"
+import Stores from "./components/stores"
+import Loading from "./components/loading"
+import ContextProvider from "./context/contextProvider"
+
+function App() {
+  const [load, setLoad] = useState(true)
+  const [open, setOpen] = useState(false)
+  const [cart, setCart] = useState(false)
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoad(false)
+    }, 3000)
+
+    return () => clearTimeout(timer)
+  }, [])
+
+  const router = createBrowserRouter([
+    {
+      path: `/`,
+      element: <RootLayout />,
+      children: [
+        { index: true, element: <HomePage /> },
+        { path: `/account`, element: <AccountPage /> }
+      ]
+    },
+    {
+      path: `/seller`,
+      element: <SellerPage />,
+      children: [
+        { index: true, element: <Products /> },
+        { path: `reels`, element: <Reels /> },
+        { path: `stores`, element: <Stores /> }
+      ]
+    },
+    { path: `/product/:id`, element: <ProductPage /> },
+    { path: `/cart`, element: <CartPage /> },
+    { path: `/checkout`, element: <CheckoutPage /> },
+    { path: `/videos`, element: <VideosPage /> },
+    // { path: `/video/:id`, element: <VideoPage /> },
+    { path: `/profile`, element: <ProfilePage /> },
+    { path: `/orders`, element: <OrdersPage /> },
+    { path: `/order/:id`, element: <OrderPage /> },
+    { path: `/notifications`, element: <NotificationsPage /> },
+    { path: `/security`, element: <SecurityPage /> },
+    { path: `/settings`, element: <SettingsPage /> },
+    { path: `/login`, element: <LoginPage /> },
+    { path: `*`, element: <NotfoundPage /> }
+  ])
+
+  if (load) return <Loading />
+
+  return (
+    <ContextProvider>
+      <RouterProvider router={router} />
+    </ContextProvider>
+  )
+}
+
+export default App
+
+====================================================================================================
+📁 FOLDER: src
+📄 FILE: index.css
+📌 PATH: src/index.css
+📝 EXTENSION: .css
+📦 SIZE: 234.0 B
+====================================================================================================
+
+@import "tailwindcss";
+@custom-variant dark (&:where(.data, .dark *));
+
+* {
+    scroll-behavior: smooth;
+}
+
+.fade {
+    animation: fade 3s;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+====================================================================================================
+📁 FOLDER: src
+📄 FILE: main.jsx
+📌 PATH: src/main.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 340.0 B
+====================================================================================================
+
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import { registerSW } from 'virtual:pwa-register'
+import './index.css'
+import App from './App.jsx'
+
+registerSW({
+  onNeedRefresh() {},
+  onOfflineReady() {},
+})
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
+
+====================================================================================================
+📁 FOLDER: src
+📄 FILE: rootLayout.jsx
+📌 PATH: src/rootLayout.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 272.0 B
+====================================================================================================
+
+import Scrolltotop from "./components/scrolltotop"
+import Footer from "./components/footer"
+import { Outlet } from "react-router"
+
+const RootLayout = () => {
+  return (
+    <>
+      <Scrolltotop />
+      <Outlet />
+      <Footer />
+    </>
+  )
+}
+
+export default RootLayout
+
+====================================================================================================
+📁 FOLDER: src/assets
+📄 FILE: assets.jsx
+📌 PATH: src/assets/assets.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 18.9 KB
+====================================================================================================
+
+import bag from './bag.jpg'
+import bag1 from './bag1.jpg'
+import bag2 from './bag2.jpg'
+import bag3 from './bag3.jpg'
+import bag4 from './bag4.jpg'
+import bag5 from './bag5.jpg'
+
+import car from './car.jpg'
+import car1 from './car1.jpg'
+import car2 from './car2.jpg'
+import car3 from './car3.jpg'
+import car4 from './car4.jpg'
+import car5 from './car5.jpg'
+
+import clip from './clip.mp4'
+import clip1 from './clip1.mp4'
+import clip2 from './clip2.mp4'
+import clip3 from './clip3.mp4'
+import clip4 from './clip4.mp4'
+import clip5 from './clip5.mp4'
+
+import cover from './cover.jpg'
+import cover1 from './cover1.jpg'
+import cover2 from './cover2.jpg'
+import cover3 from './cover3.jpg'
+import cover4 from './cover4.jpg'
+import cover5 from './cover5.jpg'
+
+import cloth from './cloth.jpg'
+import cloth1 from './cloth1.jpg'
+import cloth2 from './cloth2.jpg'
+import cloth3 from './cloth3.jpg'
+import cloth4 from './cloth4.jpg'
+import cloth5 from './cloth5.jpg'
+
+import glass from './glass.jpg'
+import glass1 from './glass1.jpg'
+import glass2 from './glass2.jpg'
+import glass3 from './glass3.jpg'
+import glass4 from './glass4.jpg'
+import glass5 from './glass5.jpg'
+
+import phone from './phone.jpg'
+import phone1 from './phone1.jpg'
+import phone2 from './phone2.jpg'
+import phone3 from './phone3.jpg'
+import phone4 from './phone4.jpg'
+import phone5 from './phone5.jpg'
+
+import shoe from './shoe.jpg'
+import shoe1 from './shoe1.jpg'
+import shoe2 from './shoe2.jpg'
+import shoe3 from './shoe3.jpg'
+import shoe4 from './shoe4.jpg'
+import shoe5 from './shoe5.jpg'
+
+import snack from './snack.jpg'
+import snack1 from './snack1.jpg'
+import snack2 from './snack2.jpg'
+import snack3 from './snack3.jpg'
+import snack4 from './snack4.jpg'
+import snack5 from './snack5.jpg'
+
+import watch from './watch.jpg'
+import watch1 from './watch1.jpg'
+import watch2 from './watch2.jpg'
+import watch3 from './watch3.jpg'
+import watch4 from './watch4.jpg'
+import watch5 from './watch5.jpg'
+
+import all from "/hero.jpg"
+import image from "./profile_image.png"
+
+export const menu_list = [
+    { _id: "1", menu_name: "All", menu_image: all },
+    { _id: "2", menu_name: "Bags", menu_image: bag },
+    { _id: "3", menu_name: "Cars", menu_image: car },
+    { _id: "4", menu_name: "Cloths", menu_image: cloth },
+    { _id: "5", menu_name: "Glasses", menu_image: glass },
+    { _id: "6", menu_name: "Phones", menu_image: phone },
+    { _id: "7", menu_name: "Shoes", menu_image: shoe },
+    { _id: "8", menu_name: "Snacks", menu_image: snack },
+    { _id: "9", menu_name: "Watches", menu_image: watch }
+]
+
+export const store_list = [
+  { _id: 1, path: `/login`, name: `Wilson's snacks`, image: snack },
+  { _id: 2, path: `/login`, name: `Wilson's cars`, image: car },
+  { _id: 3, path: `/login`, name: `Wilson's cloths`, image: cloth },
+  { _id: 4, path: `/login`, name: `Wilson's shoes`, image: shoe },
+  { _id: 5, path: `/login`, name: `Wilson's glasses`, image: glass }
+]
+
+export const video_list = [
+    { _id: "1", video: clip, cover: cover, image: image, name: `username`, likes: `68`, save: `12`, share: `24`, comments: `15`, caption: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, explicabo!` },
+    { _id: "2", video: clip1, cover: cover1, image: image, name: `username`, likes: `68`, save: `12`, share: `24`, comments: `15`, caption: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, explicabo!` },
+    { _id: "3", video: clip2, cover: cover2, image: image, name: `username`, likes: `68`, save: `12`, share: `24`, comments: `15`, caption: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, explicabo!` },
+    { _id: "4", video: clip3, cover: cover3, image: image, name: `username`, likes: `68`, save: `12`, share: `24`, comments: `15`, caption: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, explicabo!` },
+    { _id: "5", video: clip4, cover: cover4, image: image, name: `username`, likes: `68`, save: `12`, share: `24`, comments: `15`, caption: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, explicabo!` },
+    { _id: "6", video: clip5, cover: cover5, image: image, name: `username`, likes: `68`, save: `12`, share: `24`, comments: `15`, caption: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, explicabo!` }
+]
+
+export const product_list = [
+    {
+        _id: "1",
+        name: "Lorem ipsum dolor amet.",
+        image: bag,
+        price: 12,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Bags"
+    }, {
+        _id: "2",
+        name: "Lorem ipsum dolor amet.",
+        image: bag1,
+        price: 18,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Bags"
+    }, {
+        _id: "3",
+        name: "Lorem ipsum dolor amet.",
+        image: bag2,
+        price: 16,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Bags"
+    }, {
+        _id: "4",
+        name: "Lorem ipsum dolor amet.",
+        image: bag3,
+        price: 24,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Bags"
+    }, {
+        _id: "5",
+        name: "Lorem ipsum dolor amet.",
+        image: bag4,
+        price: 24,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Bags"
+    }, {
+        _id: "6",
+        name: "Lorem ipsum dolor amet.",
+        image: bag5,
+        price: 24,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Bags"
+    }, {
+        _id: "7",
+        name: "Lorem ipsum dolor amet.",
+        image: car,
+        price: 14,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Cars"
+    }, {
+        _id: "8",
+        name: "Lorem ipsum dolor amet.",
+        image: car1,
+        price: 12,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Cars"
+    }, {
+        _id: "9",
+        name: "Lorem ipsum dolor amet.",
+        image: car2,
+        price: 20,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Cars"
+    }, {
+        _id: "10",
+        name: "Lorem ipsum dolor amet.",
+        image: car3,
+        price: 15,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Cars"
+    }, {
+        _id: "11",
+        name: "Lorem ipsum dolor amet.",
+        image: car4,
+        price: 14,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Cars"
+    }, {
+        _id: "12",
+        name: "Lorem ipsum dolor amet.",
+        image: car5,
+        price: 14,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Cars"
+    }, {
+        _id: "13",
+        name: "Lorem ipsum dolor amet.",
+        image: cloth,
+        price: 14,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Cloths"
+    }, {
+        _id: "14",
+        name: "Lorem ipsum dolor amet.",
+        image: cloth1,
+        price: 22,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Cloths"
+    }, {
+        _id: "15",
+        name: "Lorem ipsum dolor amet.",
+        image: cloth2,
+        price: 10,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Cloths"
+    }, {
+        _id: "16",
+        name: "Lorem ipsum dolor amet.",
+        image: cloth3,
+        price: 12,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Cloths"
+    }, {
+        _id: "17",
+        name: "Lorem ipsum dolor amet.",
+        image: cloth4,
+        price: 14,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Cloths"
+    }, {
+        _id: "18",
+        name: "Lorem ipsum dolor amet.",
+        image: cloth5,
+        price: 14,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Cloths"
+    }, {
+        _id: "19",
+        name: "Lorem ipsum dolor amet.",
+        image: glass,
+        price: 12,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Glasses"
+    }, {
+        _id: "20",
+        name: "Lorem ipsum dolor amet.",
+        image: glass1,
+        price: 18,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Glasses"
+    }, {
+        _id: "21",
+        name: "Lorem ipsum dolor amet.",
+        image: glass2,
+        price: 16,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Glasses"
+    }, {
+        _id: "22",
+        name: "Lorem ipsum dolor amet.",
+        image: glass3,
+        price: 24,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Glasses"
+    }, {
+        _id: "23",
+        name: "Lorem ipsum dolor amet.",
+        image: glass4,
+        price: 24,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Glasses"
+    }, {
+        _id: "24",
+        name: "Lorem ipsum dolor amet.",
+        image: glass5,
+        price: 24,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Glasses"
+    }, {
+        _id: "25",
+        name: "Lorem ipsum dolor amet.",
+        image: phone,
+        price: 14,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Phones"
+    }, {
+        _id: "26",
+        name: "Lorem ipsum dolor amet.",
+        image: phone1,
+        price: 12,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Phones"
+    }, {
+        _id: "27",
+        name: "Lorem ipsum dolor amet.",
+        image: phone2,
+        price: 20,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Phones"
+    }, {
+        _id: "28",
+        name: "Lorem ipsum dolor amet.",
+        image: phone3,
+        price: 15,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Phones"
+    }, {
+        _id: "29",
+        name: "Lorem ipsum dolor amet.",
+        image: phone4,
+        price: 14,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Phones"
+    }, {
+        _id: "30",
+        name: "Lorem ipsum dolor amet.",
+        image: phone5,
+        price: 14,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Phones"
+    }, {
+        _id: "31",
+        name: "Lorem ipsum dolor amet.",
+        image: shoe,
+        price: 14,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Shoes"
+    }, {
+        _id: "32",
+        name: "Lorem ipsum dolor amet.",
+        image: shoe1,
+        price: 22,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Shoes"
+    }, {
+        _id: "33",
+        name: "Lorem ipsum dolor amet.",
+        image: shoe2,
+        price: 10,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Shoes"
+    }, {
+        _id: "34",
+        name: "Lorem ipsum dolor amet.",
+        image: shoe3,
+        price: 12,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Shoes"
+    }, {
+        _id: "35",
+        name: "Lorem ipsum dolor amet.",
+        image: shoe4,
+        price: 14,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Shoes"
+    }, {
+        _id: "36",
+        name: "Lorem ipsum dolor amet.",
+        image: shoe5,
+        price: 14,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Shoes"
+    }, {
+        _id: "37",
+        name: "Lorem ipsum dolor amet.",
+        image: snack,
+        price: 12,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Snacks"
+    }, {
+        _id: "38",
+        name: "Lorem ipsum dolor amet.",
+        image: snack1,
+        price: 18,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Snacks"
+    }, {
+        _id: "39",
+        name: "Lorem ipsum dolor amet.",
+        image: snack2,
+        price: 16,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Snacks"
+    }, {
+        _id: "40",
+        name: "Lorem ipsum dolor amet.",
+        image: snack3,
+        price: 24,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Snacks"
+    }, {
+        _id: "41",
+        name: "Lorem ipsum dolor amet.",
+        image: snack4,
+        price: 24,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Snacks"
+    }, {
+        _id: "42",
+        name: "Lorem ipsum dolor amet.",
+        image: snack5,
+        price: 24,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Snacks"
+    }, {
+        _id: "43",
+        name: "Lorem ipsum dolor amet.",
+        image: watch,
+        price: 14,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Watches"
+    }, {
+        _id: "44",
+        name: "Lorem ipsum dolor amet.",
+        image: watch1,
+        price: 12,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Watches"
+    }, {
+        _id: "45",
+        name: "Lorem ipsum dolor amet.",
+        image: watch2,
+        price: 20,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Watches"
+    }, {
+        _id: "46",
+        name: "Lorem ipsum dolor amet.",
+        image: watch3,
+        price: 15,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Watches"
+    }, {
+        _id: "47",
+        name: "Lorem ipsum dolor amet.",
+        image: watch4,
+        price: 20,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Watches"
+    }, {
+        _id: "48",
+        name: "Lorem ipsum dolor amet.",
+        image: watch5,
+        price: 20,
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dolor aliquid eos? Rerum, corrupti delectus voluptates consectetur earum quis doloremque!",
+        category: "Watches"
+    }
+]
+
+====================================================================================================
+📁 FOLDER: src/components
+📄 FILE: cartItem.jsx
+📌 PATH: src/components/cartItem.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 1.7 KB
+====================================================================================================
+
+import { useContext, useState } from "react"
+import { cartContext } from "../context/cartContext"
+import { BiMinus, BiPlus, BiX } from "react-icons/bi"
+import { Link } from "react-router"
+
+const CartItem = ({ item }) => {
+  const [quantity, setQuantity] = useState(1)
+  const { cartItems, setCartItems } = useContext(cartContext)
+
+  const removeFromCart = (id) => {
+    setCartItems(previous => previous.filter(item => item._id !== id))
+  }
+
+  const decrease = (id) => {
+    quantity > 1 ? setQuantity(previous => previous - 1) : removeFromCart(id)
+  }
+
+  const increase = () => {
+    setQuantity(previous => previous + 1)
+  }
+
+  return (
+    <div className="flex gap-5">
+      <Link to={`/product/${item._id}`} className="w-1/3 h-20">
+        <img src={item.image} alt={item.name} className="w-full h-full object-cover rounded-xl" />
+      </Link>
+      <div className="w-2/3 flex flex-col justify-between">
+        <div className="flex items-center gap-5">
+          <p className="leading-tight">{item.name}</p>
+          <button className="cursor-pointer">
+            <BiX onClick={() => { removeFromCart(item._id) }} className="text-2xl" />
+          </button>
+        </div>
+        <div className="flex justify-between items-center">
+          <p className="w-1/2 font-semibold">${item.price}</p>
+          <div className="flex justify-between items-center border-2 border-neutral-200 rounded-full w-1/2 px-2">
+            <button className="cursor-pointer">
+              <BiMinus onClick={() => { decrease(item._id) }} />
+            </button>
+            {quantity}
+            <button className="cursor-pointer">
+              <BiPlus onClick={increase} />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default CartItem
+
+====================================================================================================
+📁 FOLDER: src/components
+📄 FILE: email.jsx
+📌 PATH: src/components/email.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 81.0 B
+====================================================================================================
+
+const Email = () => {
+  return (
+    <div>Email</div>
+  )
+}
+
+export default Email
+
+====================================================================================================
+📁 FOLDER: src/components
+📄 FILE: footer.jsx
+📌 PATH: src/components/footer.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 1.3 KB
+====================================================================================================
+
+import { BiHome, BiMoviePlay, BiUser } from "react-icons/bi"
+import { GiShoppingCart } from "react-icons/gi"
+import { NavLink } from "react-router"
+import { useContext } from "react"
+import { cartContext } from "../context/cartContext"
+
+const Footer = () => {
+  const { cartItems } = useContext(cartContext)
+
+  return (
+    <footer className="bg-neutral-900/90 w-[90vw] fixed bottom-5 translate-x-1/2 right-1/2 flex justify-between items-center px-6 py-3 rounded-full z-10">
+      <NavLink to={`/`} className={({ isActive }) => `text-white ${isActive && 'text-orange-600'}`}>
+        <BiHome className="text-2xl" />
+      </NavLink>
+      <NavLink to={`/cart`} className={({ isActive }) => `text-white relative ${isActive && 'text-orange-600'}`}>
+        <GiShoppingCart className="text-3xl" />
+        {cartItems.length !== 0 && <span className="bg-red-600 w-3 h-3 rounded-full absolute top-0 right-0"></span>}
+      </NavLink>
+      <NavLink to={`/videos`} className={({ isActive }) => `text-white ${isActive && 'text-orange-600'}`}>
+        <BiMoviePlay className="text-2xl" />
+      </NavLink>
+      <NavLink to={`/account`} className={({ isActive }) => `text-white ${isActive && 'text-orange-600'}`}>
+        <BiUser className="text-2xl" />
+      </NavLink>
+    </footer>
+  )
+}
+
+export default Footer
+
+====================================================================================================
+📁 FOLDER: src/components
+📄 FILE: header.jsx
+📌 PATH: src/components/header.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 1.2 KB
+====================================================================================================
+
+import { useContext } from "react"
+import { NavLink } from "react-router"
+import { cartContext } from "../context/cartContext"
+import { BiBell, BiSearch } from "react-icons/bi"
+import logo from "/logo.png"
+
+const Header = () => {
+  const { cartItems } = useContext(cartContext)
+
+  return (
+    <header className="bg-white flex flex-col justify-center gap-3 px-4 h-[15vh] sticky top-0 z-10 dark:bg-neutral-900 dark:text-white">
+      <div className="flex justify-between items-center relative">
+        <NavLink to={`/`} className="flex items-center">
+          <img src={logo} alt="" className="w-7 h-7 object-cover" />
+          <span className="text-lg font-bold">QuickTrade</span>
+        </NavLink>
+        <NavLink to={`/notifications`}>
+          <BiBell className="text-2xl" />
+          <span className="bg-red-600 w-3 h-3 rounded-full absolute top-0 right-0"></span>
+        </NavLink>
+      </div>
+      <div className="relative">
+        <BiSearch className="absolute top-2 left-3 text-lg" />
+        <input type="search" name="search" placeholder="search here" className="border border-neutral-300 outline-none rounded-xl ps-9 pe-2 py-1 w-full" />
+      </div>
+    </header>
+  )
+}
+
+export default Header
+
+====================================================================================================
+📁 FOLDER: src/components
+📄 FILE: loading.jsx
+📌 PATH: src/components/loading.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 414.0 B
+====================================================================================================
+
+import { MdLocationOn } from "react-icons/md"
+import logo from "/logo.png"
+
+const Loading = () => {
+  return (
+    <div className="h-screen flex flex-col justify-center items-center fade">
+      <img src={logo} alt="" className="w-30" />
+      <p className="text-6xl font-bold mb-1">QuickTrade</p>
+      <p className="text-xl font-bold">Commerce, Proximity, Persistence</p>
+    </div>
+  )
+}
+
+export default Loading
+
+====================================================================================================
+📁 FOLDER: src/components
+📄 FILE: phoneNumber.jsx
+📌 PATH: src/components/phoneNumber.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 99.0 B
+====================================================================================================
+
+const PhoneNumber = () => {
+  return (
+    <div>PhoneNumber</div>
+  )
+}
+
+export default PhoneNumber
+
+====================================================================================================
+📁 FOLDER: src/components
+📄 FILE: productCard.jsx
+📌 PATH: src/components/productCard.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 1.9 KB
+====================================================================================================
+
+import { Link } from "react-router"
+import { FaStar } from "react-icons/fa"
+import { BiCart } from "react-icons/bi"
+import { useContext, useState } from "react"
+import { cartContext } from "../context/cartContext"
+
+const ProductCard = ({ item, large }) => {
+  const [added, setAdded] = useState(false)
+  const { cartItems, setCartItems } = useContext(cartContext)
+
+  const addToCart = (item) => {
+    setAdded(true)
+    setCartItems(previous => {
+      const foundItem = previous.find(value => value._id === item._id)
+      if (foundItem) {
+        alert(`already added to cart`)
+        return previous
+      }
+
+      return [...previous, { _id: item._id, name: item.name, image: item.image, price: item.price, quantity: 1 }]
+    })
+    console.log(cartItems)
+  }
+
+  return (
+    <div className={`${large ? 'w-50 rounded-t-xl' : 'w-38 rounded-t-lg'} relative bg-white shrink-0 dark:bg-neutral-900`}>
+      <BiCart onClick={() => { addToCart(item) }} className="bg-white text-neutral-900 absolute top-3 right-3 text-3xl p-1 rounded-full cursor-pointer" />
+      {added && <span className="bg-red-600 w-2 h-2 rounded-full absolute top-4 right-3"></span>}
+      <Link to={`/product/${item._id}`}>
+        <img src={item.image} alt={item.name} className={`${large ? 'rounded-t-xl h-30' : 'rounded-t-lg h-35'} w-full object-cover`} />
+        <div className="flex flex-col gap-1 py-2">
+          <p className="font-semibold leading-tight">{item.name}</p>
+          <div className="flex items-center gap-1">
+            <FaStar className="text-amber-400" />
+            <p className="text-neutral-500 text-sm dark:text-white">4.9 - 36 sold</p>
+          </div>
+          <div className="flex items-center gap-3 text-neutral-500 dark:text-white">
+            <span className="font-semibold">$22.45</span>
+            <span className="text-sm">10 km</span>
+          </div>
+        </div>
+      </Link>
+    </div>
+  )
+}
+
+export default ProductCard
+
+====================================================================================================
+📁 FOLDER: src/components
+📄 FILE: products.jsx
+📌 PATH: src/components/products.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 1.4 KB
+====================================================================================================
+
+import { FaStar } from "react-icons/fa"
+import { MdVerified } from "react-icons/md"
+import { Link } from "react-router"
+import { product_list } from "../assets/assets"
+
+const Products = () => {
+  return (
+    <div className="flex flex-col gap-4 p-4">
+      {product_list.map(product => (
+        <Link to={`/product/${product._id}`} key={product._id} className="bg-white flex gap-4 p-2 rounded-xl dark:bg-neutral-800">
+          <img src={product.image} alt="" className="w-1/4 h-20 object-cover rounded-xl" />
+          <div className="w-3/4 flex flex-col justify-between">
+            <div className="flex justify-between">
+              <span className="bg-green-200 text-green-500 flex items-center gap-1 px-2 rounded-full">
+                <MdVerified className="text-green-500 text-lg" /> Active
+              </span>
+              <div className="flex items-center gap-1">
+                <FaStar className="text-amber-400" /> 4.9 - 36 sold
+              </div>
+            </div>
+            <p className="font-bold">Lorem ipsum dolor amet.</p>
+            <div className="flex gap-5">
+              <span className="font-bold">$108.34</span>
+              <span className="font-semibold">White</span>
+              <span className="text-neutral-500 dark:text-white">42 stocks</span>
+            </div>
+          </div>
+        </Link>
+        ))}
+    </div>
+  )
+}
+
+export default Products
+
+====================================================================================================
+📁 FOLDER: src/components
+📄 FILE: reels.jsx
+📌 PATH: src/components/reels.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 852.0 B
+====================================================================================================
+
+import { FaEye } from "react-icons/fa"
+import { video_list } from "../assets/assets"
+import { Link } from "react-router"
+
+const Reels = () => {
+  return (
+    <div className="flex flex-wrap justify-center gap-4 py-4">
+      {video_list.map(video => (
+        // <Link to={`/video/${video._id}`} key={video._id} className="relative w-3/7 h-70 text-white">
+        <Link to={`/videos`} key={video._id} className="relative w-3/7 h-70 text-white">
+          <img src={video.cover} alt="" className="rounded-2xl w-full h-full object-cover" />
+          <span className="bg-neutral-900/50 px-2 absolute top-2 right-2 flex items-center gap-3 rounded-full">
+            <FaEye className="" /> 860
+          </span>
+          <p className="leading-tight p-2 absolute bottom-0">{video.caption}</p>
+        </Link>
+      ))}
+    </div>
+  )
+}
+
+export default Reels
+
+====================================================================================================
+📁 FOLDER: src/components
+📄 FILE: scrolltotop.jsx
+📌 PATH: src/components/scrolltotop.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 251.0 B
+====================================================================================================
+
+import { useEffect } from "react"
+import { useLocation } from "react-router"
+
+const Scrolltotop = () => {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
+  return null
+}
+
+export default Scrolltotop
+
+====================================================================================================
+📁 FOLDER: src/components
+📄 FILE: stores.jsx
+📌 PATH: src/components/stores.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 1.0 KB
+====================================================================================================
+
+import { FaStar } from "react-icons/fa"
+import { store_list } from "../assets/assets"
+import { Link } from "react-router"
+
+const Stores = () => {
+  return (
+    <div className="flex flex-col gap-4 p-4">
+      {store_list.map(store => (
+        <div key={store._id} className="bg-white flex p-2 rounded-xl dark:bg-neutral-800">
+          <div className="w-1/2 flex flex-col justify-center items-center gap-3">
+            <p className="font-bold leading-tight text-center">{store.name}</p>
+            <div className="flex items-center gap-1">
+              <FaStar className="text-amber-400" />
+              <span className="text-neutral-500 text-sm dark:text-white">4.9 - 16 products</span>
+            </div>
+            <Link to={store.path} className="bg-gradient-to-r from-orange-600 to-orange-400 text-white flex gap-4 px-2 rounded-xl">View store</Link>
+          </div>
+          <img src={store.image} alt="" className="w-1/2 h-30 object-cover rounded-xl" />
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export default Stores
+
+====================================================================================================
+📁 FOLDER: src/components
+📄 FILE: videoActions.jsx
+📌 PATH: src/components/videoActions.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 853.0 B
+====================================================================================================
+
+import { useState } from "react"
+import { FaComment, FaHeart, FaShare } from "react-icons/fa"
+
+const VideoActions = ({ video }) => {
+  const [like, setLike] = useState(false)
+  const style = `bg-none border-none text-white flex flex-col items-center cursor-pointer`
+
+  return (
+    <div className="absolute right-5 bottom-40 flex flex-col gap-5 z-10">
+      <button onClick={() => { setLike(previous => !previous) }} className={`${style}`}>
+        {like ? <FaHeart className="text-red-600" /> : <FaHeart />}
+        <span>{like ? Number(video.likes) + 1 : video.likes}</span>
+      </button>
+      <button className={`${style}`}>
+        <FaComment />
+        <span>{video.comments}</span>
+      </button>
+      <button className={`${style}`}>
+        <FaShare />
+        <span>Share</span>
+      </button>
+    </div>
+  )
+}
+
+export default VideoActions
+
+====================================================================================================
+📁 FOLDER: src/components
+📄 FILE: videoInfo.jsx
+📌 PATH: src/components/videoInfo.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 422.0 B
+====================================================================================================
+
+const VideoInfo = ({ video }) => {
+  return (
+    <div className="w-5/6 absolute left-5 bottom-5 flex flex-col gap-2 z-10">
+      <div className="flex items-center gap-3">
+        <img src={video.image} alt={video.name} className="w-8" />
+        <p className="text-white font-bold">@{video.name}</p>
+      </div>
+      <p className="text-white leading-tight">{video.caption}</p>
+    </div>
+  )
+}
+
+export default VideoInfo
+
+====================================================================================================
+📁 FOLDER: src/components
+📄 FILE: videoPlayer.jsx
+📌 PATH: src/components/videoPlayer.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 3.6 KB
+====================================================================================================
+
+import { useEffect, useRef, useState } from "react";
+import { BiPackage } from "react-icons/bi";
+import { FaComment, FaHeart, FaPaperPlane, FaShare, FaVolumeMute, FaVolumeUp } from "react-icons/fa";
+import { GiShare } from "react-icons/gi";
+import { MdPerson, MdVerified } from "react-icons/md";
+import { TbBookmarkFilled } from "react-icons/tb";
+import { Link } from "react-router";
+
+const VideoPlayer = ({ src, videoData, muted, setMuted }) => {
+  const videoRef = useRef(null)
+  const [like, setLike] = useState(false)
+  const [following, setFollowing] = useState(false)
+  const style = `bg-none border-none text-white flex flex-col items-center cursor-pointer`
+
+  const toggleMute = () => {
+    setMuted(previous => !previous)
+  }
+
+  useEffect(() => {
+    const video = videoRef.current;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      {
+        threshold: 0.7,
+      }
+    );
+
+    observer.observe(video);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  return (
+    <div className="absolute inset-0">
+      <video className="w-full h-full object-cover"
+        ref={videoRef}
+        src={src}
+        muted={muted}
+        loop
+        playsInline
+        preload="metadata"
+      />
+      <div className="absolute right-5 bottom-40 flex flex-col gap-5 z-10">
+        <button onClick={() => { setLike(previous => !previous) }} className={`${style}`}>
+          {like ? <FaHeart className="text-red-600 text-xl" /> : <FaHeart className="text-xl" />}
+          <span>{like ? Number(videoData.likes) + 1 : videoData.likes}</span>
+        </button>
+        <button className={`${style}`}>
+          <FaComment className="text-xl" />
+          <span>{videoData.comments}</span>
+        </button>
+        <button className={`${style}`}>
+          <TbBookmarkFilled className="text-xl" />
+          <span>{videoData.save}</span>
+        </button>
+        <button className={`${style}`}>
+          <FaPaperPlane className="text-xl" />
+          <span>{videoData.share}</span>
+        </button>
+      </div>
+      <Link to={`/product/${videoData._id}`} className="bg-neutral-900/30 text-white absolute left-5 bottom-40 flex items-center gap-3 p-2 rounded-full">
+        <BiPackage className="text-xl" /> view product
+      </Link>
+      <div className="bg-neutral-900/30 absolute bottom-0 left-0 p-4 flex flex-col gap-3 z-10">
+        <div className="flex justify-between items-center">
+          <Link to={`/seller`} className="flex items-center gap-3">
+            <img src={videoData.image} alt={videoData.name} className="w-12" />
+            <div className="flex flex-col text-white">
+              <p className="font-bold">@{videoData.name}</p>
+              <p className="flex items-center gap-2">High ranking seller <MdVerified className="text-blue-400 text-lg" /></p>
+            </div>
+          </Link>
+          {!following && <button onClick={() => { setFollowing(previous => !previous) }} className="bg-gradient-to-r from-orange-600 to-orange-400 text-white flex justify-center items-center gap-2 px-4 py-1 rounded-full cursor-pointer">
+            <MdPerson className="" /> Follow
+          </button>}
+        </div>
+        <div className="flex justify-between items-center">
+          <p className="text-white leading-tight w-9/10">{videoData.caption}</p>
+          <button onClick={toggleMute} className="cursor-pointer">
+            {muted ? <FaVolumeMute className="text-white text-2xl" /> : <FaVolumeUp className="text-white text-2xl" />}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default VideoPlayer
+
+====================================================================================================
+📁 FOLDER: src/context
+📄 FILE: authContext.jsx
+📌 PATH: src/context/authContext.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 325.0 B
+====================================================================================================
+
+import { createContext, useState } from "react"
+
+export const authContext = createContext()
+
+const AuthProvider = ({ children }) => {
+  const [login, setLogin] = useState(true)
+
+  return (
+    <authContext.Provider value={{ login, setLogin }}>
+      { children }
+    </authContext.Provider>
+  )
+}
+
+export default AuthProvider
+
+====================================================================================================
+📁 FOLDER: src/context
+📄 FILE: cartContext.jsx
+📌 PATH: src/context/cartContext.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 339.0 B
+====================================================================================================
+
+import { createContext, useState } from "react"
+
+export const cartContext = createContext()
+
+const CartProvider = ({ children }) => {
+  const [cartItems, setCartItems] = useState([])
+
+  return (
+    <cartContext.Provider value={{ cartItems, setCartItems }}>
+      { children }
+    </cartContext.Provider>
+  )
+}
+
+export default CartProvider
+
+====================================================================================================
+📁 FOLDER: src/context
+📄 FILE: contextProvider.jsx
+📌 PATH: src/context/contextProvider.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 372.0 B
+====================================================================================================
+
+import AuthProvider from "./authContext"
+import CartProvider from "./cartContext"
+import ThemeProvider from "./themeContext"
+
+const ContextProvider = ({ children }) => {
+  return (
+    <ThemeProvider>
+      <AuthProvider>
+        <CartProvider>
+          { children }
+        </CartProvider>
+      </AuthProvider>
+    </ThemeProvider>
+  )
+}
+
+export default ContextProvider
+
+====================================================================================================
+📁 FOLDER: src/context
+📄 FILE: themeContext.jsx
+📌 PATH: src/context/themeContext.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 1.1 KB
+====================================================================================================
+
+import { createContext, useContext, useEffect, useState } from "react"
+
+export const themeContext = createContext()
+
+const ThemeProvider = ({ children }) => {
+  const [darkMode, setDarkMode] = useState(false)
+
+  const toggleDarkMode = () => {
+    setDarkMode((prev) => !prev)
+    document.documentElement.classList.toggle(`dark`)
+  }
+
+  return (
+    <themeContext.Provider value={{ darkMode, toggleDarkMode }}>
+      { children }
+    </themeContext.Provider>
+  )
+}
+
+export default ThemeProvider
+
+// export function ThemeProvider({ children }) {
+//   const [darkMode, setDarkMode] = useState(() => {
+//     return localStorage.getItem("theme") === "dark";
+//   });
+
+//   useEffect(() => {
+//     const root = document.documentElement;
+
+//     root.classList.toggle("dark", darkMode);
+
+//     localStorage.setItem("theme", darkMode ? "dark" : "light");
+//   }, [darkMode]);
+
+//   const toggleDarkMode = () => {
+//     setDarkMode((prev) => !prev);
+//   };
+
+//   return (
+//     <ThemeContext.Provider value={{ darkMode, toggleDarkMode }}>
+//       {children}
+//     </ThemeContext.Provider>
+//   );
+// }
+
+// export function useTheme() {
+//   return useContext(ThemeContext);
+// }
+
+====================================================================================================
+📁 FOLDER: src/pages
+📄 FILE: accountPage.jsx
+📌 PATH: src/pages/accountPage.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 1.7 KB
+====================================================================================================
+
+import { MdLogout, MdPerson, MdSecurity, MdSettings } from "react-icons/md"
+import { BiBell, BiBox, BiCreditCard } from "react-icons/bi"
+import { FaAngleRight } from "react-icons/fa"
+import { Link } from "react-router"
+import image from "../assets/profile_image.png"
+import { FiSettings } from "react-icons/fi"
+
+const AccountPage = () => {
+  const routes = [
+    { id: 1, title: `Profile`, path: `/profile`, icon: <MdPerson className="text-2xl" /> },
+    { id: 2, title: `My Orders`, path: `/orders`, icon: <BiBox className="text-2xl" /> },
+    { id: 3, title: `Notifications`, path: `/notifications`, icon: <BiBell className="text-2xl" /> },
+    { id: 4, title: `Security & Support`, path: `/security`, icon: <MdSecurity className="text-2xl" /> },
+    { id: 5, title: `System Settings`, path: `/settings`, icon: <FiSettings className="text-2xl" /> },
+    { id: 6, title: `Logout`, path: `/login`, icon: <MdLogout className="text-2xl" /> }
+  ]
+
+  return (
+    <main className="bg-neutral-200 min-h-screen dark:bg-neutral-900 dark:text-white">
+      <div className="bg-white sticky top-0 flex flex-col items-center gap-1 py-10 z-10 dark:bg-neutral-800">
+        <img src={image} alt="" className="w-25" />
+        <p className="text-xl font-bold">Jenny Wilson</p>
+      </div>
+      <div className="flex flex-col gap-4 px-4 pt-10 pb-30">
+        {routes.map(route => (
+          <Link key={route.id} to={route.path} className="bg-white flex justify-between items-center p-3 rounded-lg dark:bg-neutral-800">
+            <div className="flex items-center gap-3">
+              {route.icon}
+              {route.title}
+            </div>
+            <FaAngleRight className="text-lg" />
+          </Link>
+        ))}
+      </div>
+    </main>
+  )
+}
+
+export default AccountPage
+
+====================================================================================================
+📁 FOLDER: src/pages
+📄 FILE: cartPage.jsx
+📌 PATH: src/pages/cartPage.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 2.3 KB
+====================================================================================================
+
+import { Link, useNavigate } from "react-router"
+import { MdDelete } from "react-icons/md"
+import { FaAngleLeft, FaArrowLeft } from "react-icons/fa"
+import { useContext } from "react"
+import { cartContext } from "../context/cartContext"
+import CartItem from "../components/cartItem"
+import Scrolltotop from "../components/scrolltotop"
+
+const CartPage = () => {
+  const navigate = useNavigate()
+  const { cartItems, setCartItems } = useContext(cartContext)
+
+  const fees = [
+    { id: `1`, title: `Subtotal`, price: `$22.45` },
+    { id: `2`, title: `Delivery`, price: `$5` },
+    { id: `3`, title: `Total`, price: `$27.45` },
+  ]
+
+  const deleteCartItems = (id) => {
+    setCartItems([])
+  }
+
+  return (
+    <main className="bg-neutral-200 min-h-screen dark:bg-neutral-900 dark:text-white">
+      <Scrolltotop />
+      <div className="bg-neutral-200 sticky top-0 flex justify-between items-center p-4 dark:bg-neutral-900">
+        <button onClick={() => { navigate(-1) }} className="cursor-pointer">
+          <FaArrowLeft className="text-xl" />
+        </button>
+        <p className="text-lg font-bold">Cart ({cartItems.length})</p>
+        <button onClick={deleteCartItems} className="cursor-pointer">
+          <MdDelete className="text-2xl" />
+        </button>
+      </div>
+      <div className="flex flex-col gap-5 h-[70vh] overflow-auto bg-white p-4 dark:bg-neutral-800">
+        {cartItems.length === 0 && <p className="text-lg font-bold h-full flex justify-center items-center">Your cart is empty!</p>}
+        {cartItems.map(item => (
+          <CartItem key={item._id} item={item} />
+        ))}
+      </div>
+      <div className="bg-white flex flex-col gap-4 p-4 my-4 dark:bg-neutral-800">
+        <p className="text-xl font-bold">Order Summary</p>
+        <div className="flex flex-col gap-2">
+          {fees.map(item => (
+            <div key={item.id} className="flex justify-between">
+              <span className="font-semibold">{item.title}</span>
+              <span >{item.price}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="bg-white flex p-4 dark:bg-neutral-800">
+        <Link to={`/checkout`} className="bg-gradient-to-b from-orange-600 to-orange-400 text-white text-center rounded-full w-full py-2">Checkout now</Link>
+      </div>
+    </main>
+  )
+}
+
+export default CartPage
+
+====================================================================================================
+📁 FOLDER: src/pages
+📄 FILE: checkoutPage.jsx
+📌 PATH: src/pages/checkoutPage.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 3.2 KB
+====================================================================================================
+
+import { FaAngleLeft, FaArrowLeft } from "react-icons/fa"
+import { Link, useNavigate } from "react-router"
+import card from "../assets/card2.jpg"
+import applePay from "../assets/applePay.jpg"
+import master from "../assets/master.jpg"
+import paypal from "../assets/paypal.jpg"
+import visa from "../assets/visa.jpg"
+import { useState } from "react"
+import { MdLocationOn } from "react-icons/md"
+import Scrolltotop from "../components/scrolltotop"
+
+const CheckoutPage = () => {
+  const navigate = useNavigate()
+  const [id, setId] = useState(null)
+
+  const fees = [
+    { id: `1`, title: `Subtotal`, price: `$22.45` },
+    { id: `2`, title: `Delivery`, price: `$5` },
+    { id: `3`, title: `Total`, price: `$27.45` },
+  ]
+
+  const payments = [
+    { id: `1`, image: applePay },
+    { id: `2`, image: master },
+    { id: `3`, image: paypal },
+    { id: `4`, image: visa }
+  ]
+
+  return (
+    <main className="bg-neutral-200 min-h-screen dark:bg-neutral-900 dark:text-white">
+      <Scrolltotop />
+      <button onClick={() => { navigate(-1) }} className="fixed top-5 left-5 z-20 cursor-pointer">
+        <FaArrowLeft className="text-xl" />
+      </button>
+      <div className="bg-white sticky top-0 flex justify-center py-4 dark:bg-neutral-800">
+        <span className="text-lg font-bold">Checkout</span>
+      </div>
+      <div className="p-4">
+        <img src={card} alt="" className="w-full h-50 rounded-2xl" />
+      </div>
+      <div className="flex flex-col gap-5 p-4 my-2">
+        <p className="font-bold">Delivery Address</p>
+        <div className="flex items-center gap-3">
+          <div className="bg-white text-neutral-900 flex justify-center items-center w-1/5 h-20 rounded-xl">
+            <MdLocationOn className="text-5xl rounded-xl" />
+          </div>
+          <div className="flex flex-col gap-1 w-4/5">
+            <p className="font-bold">Jenny Wilson</p>
+            <p className="leading-tight">No. 55 Jonathan Street, Apo, Abuja, Nigeria</p>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col gap-5 p-4 my-2">
+        <p className="font-bold">Payment Method</p>
+        <div className="flex justify-between">
+          {payments.map(payment => (
+            <button key={payment.id} onClick={() => { setId(payment.id) }} className={`rounded-xl cursor-pointer ${payment.id === id && 'outline-2 outline-neutral-800 dark:outline-white'}`}>
+              <img src={payment.image} alt="" className="w-18 h-12 object-cover rounded-xl" />
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className="flex flex-col gap-4 p-4 my-4">
+        <p className="text-xl font-bold">Order Summary</p>
+        <div className="flex flex-col gap-2">
+          {fees.map(item => (
+            <div key={item.id} className="flex justify-between">
+              <span className="font-semibold">{item.title}</span>
+              <span >{item.price}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="bg-white flex p-4 dark:bg-neutral-800">
+        <Link to={`/login`} className="bg-gradient-to-b from-orange-600 to-orange-400 text-white text-center rounded-full w-full py-2">Pay now</Link>
+      </div>
+    </main>
+  )
+}
+
+export default CheckoutPage
+
+====================================================================================================
+📁 FOLDER: src/pages
+📄 FILE: homePage.jsx
+📌 PATH: src/pages/homePage.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 2.8 KB
+====================================================================================================
+
+import { Link } from "react-scroll"
+import { useEffect, useState } from "react"
+import { product_list, menu_list } from "../assets/assets"
+import Header from "../components/header"
+import ProductCard from "../components/productCard"
+import Marquee from "react-fast-marquee"
+
+const HomePage = () => {
+  const [menuId, setMenuId] = useState(`1`)
+  const [category, setCategory] = useState(`All`)
+
+  const selectMenu = (menu) => {
+    setMenuId(menu._id)
+    setCategory(menu.menu_name)
+  }
+
+  const filteredProducts = category === `All` ? product_list : product_list.filter(item => item.category === category)
+  const info = [`Nationwide delivery`, `10% off your first order`, `Secure payment`, `Free shipping on orders over $50`, `New products added every week`]
+
+  return (
+    <div>
+      <Header />
+      <main className="bg-white flex flex-col gap-10 py-4 z-0 min-h-screen dark:bg-neutral-900 dark:text-white">
+        <div className="bg-[url('/hero.jpg')] bg-cover bg-center h-[25vh] mx-4 rounded-2xl relative">
+          <div className="bg-neutral-800/30 absolute inset-0 rounded-2xl"></div>
+          <div className="absolute bottom-4 left-4">
+            <h1 className="text-white text-xl font-bold leading-tight mb-5">Order your favourite <br /> products here</h1>
+            <p className="hidden text-white mb-5 w-1/2 leading-tight">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Est inventore aut possimus quibusdam laborum et fugit tempora iure, quasi, quam dolores aliquid suscipit enim provident!</p>
+            <Link to="category" offset={-100} className="bg-white text-neutral-900 rounded-full px-3 py-1 hover:bg-gradient-to-r from-orange-600 to-orange-400 hover:text-white cursor-pointer">View category</Link>
+          </div>
+        </div>
+        <div className="mx-4">
+          <Marquee pauseOnHover={true}>
+            {info.map(item => (
+              <p key={item} className="px-2 font-bold">{item}</p>
+            ))}
+          </Marquee>
+        </div>
+        <div className="flex flex-col gap-10">
+          <div className="bg-white flex overflow-x-auto sticky top-[15vh] py-2 z-10 dark:bg-neutral-900">
+            {menu_list.map(menu => (
+              <button key={menu._id} onClick={() => { selectMenu(menu) }} className="flex flex-col items-center w-2/9 shrink-0 cursor-pointer">
+                <img src={menu.menu_image} alt="" className={`${menuId === menu._id && "border-4 border-orange-600"} w-18 h-18 rounded-full`} />
+                <span className={`${menuId === menu._id && "text-orange-600"}`}>{menu.menu_name}</span>
+              </button>
+            ))}
+          </div>
+          <div className="flex flex-wrap justify-center gap-5 mb-20">
+            {filteredProducts.map(item => (
+              <ProductCard key={item._id} item={item} />
+            ))}
+          </div>
+        </div>
+      </main>
+    </div>
+  )
+}
+
+export default HomePage
+
+====================================================================================================
+📁 FOLDER: src/pages
+📄 FILE: loginPage.jsx
+📌 PATH: src/pages/loginPage.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 3.2 KB
+====================================================================================================
+
+import { FaAngleLeft, FaArrowLeft } from "react-icons/fa"
+import { MdLocationOn } from "react-icons/md"
+import { Link, useNavigate } from "react-router"
+import { useContext } from "react"
+import { authContext } from "../context/authContext"
+import apple from "../assets/apple.jpg"
+import google from "../assets/google.jpg"
+import Scrolltotop from "../components/scrolltotop"
+
+const LoginPage = () => {
+  const navigate = useNavigate()
+  const { login, setLogin } = useContext(authContext)
+
+  const submitForm = (e) => {
+    e.preventDefault()
+    alert(`submitted!`)
+  }
+
+  return (
+    <main className="bg-white w-screen relative flex flex-col gap-10 justify-center min-h-screen dark:bg-neutral-900 dark:text-white">
+      <Scrolltotop />
+      <button onClick={() => { navigate(-1) }} className="absolute top-5 left-5 z-20 cursor-pointer">
+        <FaArrowLeft className="text-xl" />
+      </button>
+      <div className="flex flex-col gap-3 items-center">
+        {/* <MdLocationOn className="text-5xl absolute top-5 left-17" /> */}
+        <p className="text-orange-400 text-2xl font-bold">{ login ? `Login` : `Create Account` }</p>
+        <p className="font-semibold">{ login ? `Welcome to QuickTrade` : `Create an account with QuickTrade` }</p>
+      </div>
+      <form noValidate onSubmit={submitForm} className="flex flex-col gap-5 p-5">
+        <input type="email" name="email" placeholder="email" className="bg-orange-100 outline-none rounded-xl p-2 placeholder:text-neutral-700" />
+        <input type="password" name="password" placeholder="password" className="bg-orange-100 outline-none rounded-xl p-2 placeholder:text-neutral-700" />
+        {!login && <input type="password" name="confirmPassword" placeholder="confirm password" className="bg-orange-100 outline-none rounded-xl p-2 placeholder:text-neutral-700" />}
+        {login && <Link to={`/`} className="text-orange-400 self-end hover:text-orange-600">Forgot Password?</Link>}
+        <button type="submit" className="bg-gradient-to-b from-orange-600 to-orange-400 text-white rounded-xl py-2 cursor-pointer">{login ? `Login` : `Create account`}</button>
+        <div className="flex flex-col gap-5">
+          <div className="flex justify-center items-center gap-3">
+            <span className="w-1/5 h-0.5 bg-neutral-300"></span>
+            <p>or continue with</p>
+            <span className="w-1/5 h-0.5 bg-neutral-300"></span>
+          </div>
+          <div className="flex justify-center items-center gap-5">
+            <button type="button" className="p-2 rounded-xl cursor-pointer">
+              <img src={google} alt="Google icon" className="w-10" />
+            </button>
+            <button type="button" className="p-3 rounded-xl cursor-pointer">
+              <img src={apple} alt="Apple icon" className="w-8" />
+            </button>
+          </div>
+        </div>
+      </form>
+      <p className="absolute bottom-5 w-full flex justify-center gap-2">
+        <span>{login ? `Create a new account?` : `Already have an account?`}</span>
+        <span onClick={() => { setLogin(previous => !previous) }} className="text-orange-400 cursor-pointer hover:text-orange-600">{login ? `Click here` : `Login here`}</span>
+      </p>
+    </main>
+  )
+}
+
+export default LoginPage
+
+====================================================================================================
+📁 FOLDER: src/pages
+📄 FILE: notfoundPage.jsx
+📌 PATH: src/pages/notfoundPage.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 368.0 B
+====================================================================================================
+
+import { Link } from "react-router"
+
+const NotfoundPage = () => {
+  return (
+    <div className="bg-orange-400 flex flex-col items-center justify-center gap-5 min-h-screen">
+      <p className="text-xl font-bold">404, page not found!</p>
+      <Link to={`/`} className="bg-white px-5 py-1 rounded-full">back to home</Link>
+    </div>
+  )
+}
+
+export default NotfoundPage
+
+====================================================================================================
+📁 FOLDER: src/pages
+📄 FILE: notificationsPage.jsx
+📌 PATH: src/pages/notificationsPage.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 2.7 KB
+====================================================================================================
+
+import { BiInfoCircle } from "react-icons/bi"
+import { FaAngleLeft, FaArrowLeft } from "react-icons/fa"
+import { Link, useNavigate } from "react-router"
+import Scrolltotop from "../components/scrolltotop"
+
+const NotificationsPage = () => {
+  const navigate = useNavigate()
+
+  const notifications = [
+    { id: `1`, time: `30m`, title: `Your order has arrived`, content: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde eligendi soluta nisi rerum voluptates harum odit facilis qui enim quae.` },
+    { id: `2`, time: `4h`, title: `Payment verified`, content: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde eligendi soluta nisi rerum voluptates harum odit facilis qui enim quae.` },
+    { id: `3`, time: `1d`, title: `New promo just for you`, content: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde eligendi soluta nisi rerum voluptates harum odit facilis qui enim quae.` },
+    { id: `4`, time: `1d`, title: `Check out products near you`, content: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde eligendi soluta nisi rerum voluptates harum odit facilis qui enim quae.` },
+    { id: `5`, time: `2d`, title: `A new product just arrived`, content: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde eligendi soluta nisi rerum voluptates harum odit facilis qui enim quae.` },
+    { id: `6`, time: `2d`, title: `People are buying these products`, content: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde eligendi soluta nisi rerum voluptates harum odit facilis qui enim quae.` }
+  ]
+
+  return (
+    <main className="bg-neutral-200 min-h-screen dark:bg-neutral-900 dark:text-white">
+      <Scrolltotop />
+      <button onClick={() => { navigate(-1) }} className="fixed top-5 left-5 z-20 cursor-pointer">
+        <FaArrowLeft className="text-xl" />
+      </button>
+      <div className="bg-white sticky top-0 flex justify-center py-4 dark:bg-neutral-800">
+        <span className="text-xl font-bold">Notifications</span>
+      </div>
+      <div className="flex flex-col gap-5 px-4 py-10">
+        {notifications.map(notification => (
+          <div key={notification.id} className="bg-white flex flex-col gap-3 p-3 rounded-xl dark:bg-neutral-800">
+            <div className="flex justify-between items-center">
+              <p className="font-bold flex items-center gap-3">
+                <BiInfoCircle className="text-orange-600 text-lg" />
+                {notification.title}
+              </p>
+              <span className="font-semibold">{notification.time}</span>
+            </div>
+            <p className="leading-tight">{notification.content}</p>
+          </div>
+        ))}
+      </div>
+    </main>
+  )
+}
+
+export default NotificationsPage
+
+====================================================================================================
+📁 FOLDER: src/pages
+📄 FILE: orderPage.jsx
+📌 PATH: src/pages/orderPage.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 2.5 KB
+====================================================================================================
+
+import { Link, useNavigate } from "react-router"
+import delivery from "../assets/delivery.jpg"
+import { FaAngleLeft, FaArrowLeft } from "react-icons/fa"
+import Scrolltotop from "../components/scrolltotop"
+
+const OrderPage = () => {
+  const navigate = useNavigate()
+
+  const data = [
+    { id: `1`, title: `Order ID`, value: `#100100` },
+    { id: `2`, title: `Delivery Address`, value: `45 onye's house` },
+    { id: `3`, title: `Tracking ID`, value: `12345678` },
+    { id: `4`, title: `Est. Delivery Date`, value: `20 Aug 2026, 9:10 AM` }
+  ]
+
+  const order = [
+    { id: `1`, title: `watch`, category: `watch`, price: `200.87` },
+    { id: `2`, title: `shoe`, category: `shoe`, price: `80.90` },
+    { id: `3`, title: `bag`, category: `bag`, price: `120.23` }
+  ]
+
+  return (
+    <main className="bg-white min-h-screen p-4 dark:bg-neutral-900 dark:text-white">
+      <Scrolltotop />
+      <button onClick={() => { navigate(-1) }} className="fixed top-5 left-5 z-20 cursor-pointer">
+        <FaArrowLeft className="text-xl" />
+      </button>
+      <div className="flex flex-col items-center py-20">
+        <img src={delivery} alt="" className="w-30 rounded-xl" />
+        <p className="text-2xl font-bold">Order Status</p>
+        <p>Your package is on the way</p>
+      </div>
+      <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-3">
+          {order.map(item => (
+            <div key={item.id} className="bg-neutral-200 flex gap-5 p-2 rounded-xl dark:bg-neutral-800">
+              <img src={delivery} alt="" className="w-1/5 rounded-xl" />
+              <div className="flex justify-between items-center w-4/5">
+                <div className="flex flex-col gap-2">
+                  <span className="text-neutral-500 dark:text-white">{item.category}</span>
+                  <p className="text-lg font-bold">{item.title}</p>
+                </div>
+                <span className="text-lg font-bold">{item.price}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+        <p className="text-xl font-bold py-4 border-y border-y-neutral-500 dark:border-y-white">Order Summary</p>
+        <div className="flex flex-col gap-3">
+          {data.map(item => (
+            <div key={item.id} className="flex justify-between items-center">
+              <span className="text-neutral-500 dark:text-white">{item.title}</span>
+              <span className="font-bold">{item.value}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </main>
+  )
+}
+
+export default OrderPage
+
+====================================================================================================
+📁 FOLDER: src/pages
+📄 FILE: ordersPage.jsx
+📌 PATH: src/pages/ordersPage.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 3.4 KB
+====================================================================================================
+
+import { MdLogout, MdPerson, MdSecurity, MdSettings } from "react-icons/md"
+import { BiBell, BiBox, BiCreditCard, BiInfoCircle } from "react-icons/bi"
+import { FaAngleRight, FaArrowLeft, FaEye } from "react-icons/fa"
+import { Link, useNavigate } from "react-router"
+import { useState } from "react"
+import image from "../assets/profile_image.png"
+import Scrolltotop from "../components/scrolltotop"
+
+const OrdersPage = () => {
+  const navigate = useNavigate()
+  const [status, setStatus] = useState(`All`)
+
+  const orders = [
+    { id: `1`, orderId: `#100100`, date: `2 Feb 2026, 10:27 AM`, amount: `$245.92`, status: `Processing` },
+    { id: `2`, orderId: `#100130`, date: `3 June 2026, 8:48 AM`, amount: `$120.95`, status: `Cancelled` },
+    { id: `3`, orderId: `#100140`, date: `9 Aug 2026, 4:16 PM`, amount: `$212.49`, status: `Cancelled` },
+    { id: `4`, orderId: `#100150`, date: `20 Aug 2026, 9:10 AM`, amount: `$88.62`, status: `Delivered` },
+    { id: `5`, orderId: `#100160`, date: `2 Feb 2026, 10:27 AM`, amount: `$245.92`, status: `Delivered` },
+    { id: `6`, orderId: `#100170`, date: `28 Feb 2026, 6:02 PM`, amount: `$165.25`, status: `Delivered` },
+  ]
+
+  const toggle = [
+    { id: `1`, title: `All`, status: `All` },
+    { id: `2`, title: `Active`, status: `Processing` },
+    { id: `3`, title: `Delivered`, status: `Delivered` },
+    { id: `4`, title: `Cancelled`, status: `Cancelled` }
+  ]
+
+  const statusStyle = {
+    Processing: `bg-orange-200 text-orange-500`,
+    Delivered: `bg-green-200 text-green-500`,
+    Cancelled: `bg-red-200 text-red-500`
+  }
+
+  const filteredOrders = status === `All` ? orders : orders.filter(order => order.status === status)
+
+  return (
+    <main className="bg-neutral-200 min-h-screen dark:bg-neutral-900 dark:text-white">
+      <Scrolltotop />
+      <button onClick={() => { navigate(-1) }} className="fixed top-5 left-5 z-20 cursor-pointer">
+        <FaArrowLeft className="text-xl" />
+      </button>
+      <div className="bg-white sticky top-0 flex flex-col gap-5 p-4 z-10 dark:bg-neutral-800">
+        <div className="flex justify-center">
+          <span className="text-xl font-bold">My Orders</span>
+        </div>
+        <div className="flex gap-5">
+          {toggle.map(item => (
+            <button key={item.id} onClick={() => { setStatus(item.status) }} className={`w-1/4 pb-2 cursor-pointer ${item.status === status && 'border-b border-b-orange-600'}`}>{item.title}</button>
+          ))}
+        </div>
+      </div>
+      <div className="flex flex-col gap-5 px-4 py-10">
+        {filteredOrders.map(order => (
+          <div key={order.id} className="bg-white flex flex-col gap-3 p-3 rounded-xl dark:bg-neutral-800">
+            <div className="flex justify-between items-center">
+              <p className="font-bold flex items-center gap-3">Order ID {order.orderId}</p>
+              <Link to={`/order/${order.id}`} className="bg-neutral-200 flex items-center gap-2 px-2 py-1 rounded-lg dark:bg-white dark:text-neutral-900">
+                <FaEye className="text-xl" />
+                <span className="font-semibold">View</span>
+              </Link>
+            </div>
+            <div className="flex justify-between items-end">
+              <div className="">
+                <p>{order.amount}</p>
+                <p>{order.date}</p>
+              </div>
+              <span className={`${statusStyle[order.status]} px-2`}>{order.status}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </main>
+  )
+}
+
+export default OrdersPage
+
+====================================================================================================
+📁 FOLDER: src/pages
+📄 FILE: productPage.jsx
+📌 PATH: src/pages/productPage.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 4.2 KB
+====================================================================================================
+
+import { useContext, useState } from "react"
+import { Link, useNavigate, useParams } from "react-router"
+import { FaAngleLeft, FaArrowLeft, FaStar } from "react-icons/fa"
+import { BiCart } from "react-icons/bi"
+import { MdMessage, MdVerified } from "react-icons/md"
+import { product_list } from "../assets/assets"
+import image from "../assets/profile_image.png"
+import Scrolltotop from "../components/scrolltotop"
+import { cartContext } from "../context/cartContext"
+
+const ProductPage = () => {
+  const { id } = useParams()
+  const navigate = useNavigate()
+  const { cartItems, setCartItems } = useContext(cartContext)
+  const product = product_list.find(product => product._id === id)
+
+  const [selected, setSelected] = useState(null)
+  const handleSelection = (size) => {
+    setSelected(size._id)
+  }
+
+  const sizes = [
+    { _id: 1, size: `XS` },
+    { _id: 2, size: `S` },
+    { _id: 3, size: `M` },
+    { _id: 4, size: `L` },
+    { _id: 5, size: `XL` }
+  ]
+
+  const addToCart = (item) => {
+    setCartItems(previous => {
+      const foundItem = previous.find(value => value._id === item._id)
+      if (foundItem) {
+        alert(`already added to cart`)
+        return previous
+      }
+
+      return [...previous, { _id: item._id, name: item.name, image: item.image, price: item.price, quantity: 1 }]
+    })
+    console.log(cartItems)
+  }
+
+  return (
+    <main className="bg-white min-h-screen dark:bg-neutral-900 dark:text-white">
+      <Scrolltotop />
+      <section>
+        <div className="bg-white sticky top-0 flex justify-between items-center p-4 dark:bg-neutral-800">
+          <button onClick={() => { navigate(-1) }} className="cursor-pointer">
+            <FaArrowLeft className="text-xl" />
+          </button>
+          <p className="font-bold text-lg">Product Details</p>
+          <Link to={`/cart`} className="relative">
+            <BiCart className="text-2xl" />
+            {cartItems.length !== 0 && <span className="bg-red-600 w-2 h-2 rounded-full absolute top-0 right-0"></span>}
+          </Link>
+        </div>
+        <img src={product.image} alt={product.name} className="w-full h-[45vh] object-cover" />
+      </section>
+      <section className="flex flex-col gap-5 p-4">
+        <div className="flex flex-col gap-2">
+          <p className="font-bold text-lg">{product.name}</p>
+          <div className="flex justify-between">
+            <span className="font-bold text-lg">$22.45</span>
+            <div className="flex items-center gap-2">
+              <FaStar className="text-amber-300" />
+              <span className="">4.9 Rating</span>
+            </div>
+          </div>
+        </div>
+        <div className="flex justify-between items-center">
+          <Link to={`/seller`} className="flex items-center gap-3">
+            <img src={image} alt="" className="w-12" />
+            <div className="flex flex-col">
+              <span className="font-bold">Jenny Wilson</span>
+              <p className="flex items-center gap-2">High ranking seller <MdVerified className="text-blue-400 text-lg" /></p>
+            </div>
+          </Link>
+          <button className="cursor-pointer">
+            <MdMessage className="text-xl" />
+          </button>
+        </div>
+        <div className="flex flex-col gap-1">
+          <p className="font-bold">Description</p>
+          <p className="leading-tight">{product.description}</p>
+        </div>
+        <div className="flex justify-between">
+          {sizes.map(size => (
+            <button key={size._id} onClick={() => { handleSelection(size) }} className={`${selected === size._id && "outline-2 outline-neutral-800 dark:outline-white"} bg-neutral-200 w-10 p-2 font-bold rounded-lg cursor-pointer dark:bg-neutral-800`}>{size.size}</button>
+          ))}
+        </div>
+        <div className="flex gap-5">
+          <button onClick={() => { addToCart(product) }} className="bg-gradient-to-r from-neutral-900 to-neutral-600 text-white w-1/2 p-2 rounded-lg cursor-pointer dark:from-white dark:to-white dark:text-neutral-900">ADD TO CART</button>
+          <Link to={`/checkout`} className="bg-gradient-to-r from-orange-600 to-orange-400 text-white text-center w-1/2 p-2 rounded-lg">BUY NOW</Link>
+        </div>
+      </section>
+    </main>
+  )
+}
+
+export default ProductPage
+
+====================================================================================================
+📁 FOLDER: src/pages
+📄 FILE: profilePage.jsx
+📌 PATH: src/pages/profilePage.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 2.9 KB
+====================================================================================================
+
+import { BiCamera } from "react-icons/bi"
+import image from "../assets/profile_image.png"
+import { FaAngleLeft, FaArrowLeft } from "react-icons/fa"
+import Scrolltotop from "../components/scrolltotop"
+import { Link, useNavigate } from "react-router"
+import { useState } from "react"
+
+const ProfilePage = () => {
+  const navigate = useNavigate()
+  const [profileImage, setProfileImage] = useState(null)
+
+  const selectImage = (e) => {
+    setProfileImage(URL.createObjectURL(e.target.files[0]))
+  }
+
+  const submitForm = (e) => {
+    e.preventDefault()
+    alert(`submitted!`)
+  }
+
+  return (
+    <main className="bg-white min-h-screen dark:bg-neutral-900 dark:text-white">
+      <Scrolltotop />
+      <button onClick={() => { navigate(-1) }} className="fixed top-5 left-5 z-20 cursor-pointer">
+        <FaArrowLeft className="text-xl" />
+      </button>
+      <div className="bg-white sticky top-0 flex justify-center py-4 z-10 dark:bg-neutral-800">
+        <span className="text-lg font-bold">Edit Profile</span>
+      </div>
+      <form noValidate onSubmit={submitForm} className="flex flex-col py-10 px-4">
+        <div className="relative self-center mb-15">
+          <label htmlFor="image">
+            <img src={profileImage ? profileImage : image} alt="" className="w-30 h-30 object-cover rounded-full" />
+            <BiCamera className="bg-white text-neutral-900 text-4xl p-2 rounded-full absolute bottom-0 right-0" />
+          </label>
+          <input type="file" name="image" id="image" onChange={selectImage} className="hidden" />
+        </div>
+        <div className="bg-white rounded-2xl mb-10 dark:bg-neutral-800">
+          <div className="flex items-center p-3">
+            <label htmlFor="" className="w-1/3">Full name</label>
+            <input type="text" name="" id="" value={`Jenny Wilson`} className="text-end font-semibold w-2/3 outline-none py-2" />
+          </div>
+          <div className="flex items-center p-3">
+            <label htmlFor="" className="w-1/3">Phone number</label>
+            <input type="tel" name="" id="" value={`+65 2311 333`} className="text-end font-semibold w-2/3 outline-none py-2"  />
+          </div>
+          <div className="flex items-center p-3">
+            <label htmlFor="" className="w-1/3">Email</label>
+            <input type="email" name="" id="" value={`jenny@gmail.com`} className="text-end font-semibold w-2/3 outline-none py-2"  />
+          </div>
+          <div className="flex items-center p-3">
+            <label htmlFor="" className="w-1/3">Address</label>
+            <input type="text" name="" id="" value={`123 Royal Street, New York`} className="text-end font-semibold w-2/3 outline-none py-2"  />
+          </div>
+        </div>
+        <button type="submit" className="bg-gradient-to-b from-orange-600 to-orange-400 text-white rounded-xl py-2 cursor-pointer">Save Changes</button>
+      </form>
+    </main>
+  )
+}
+
+export default ProfilePage
+
+====================================================================================================
+📁 FOLDER: src/pages
+📄 FILE: securityPage.jsx
+📌 PATH: src/pages/securityPage.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 2.0 KB
+====================================================================================================
+
+import { Link, useNavigate } from "react-router"
+import Scrolltotop from "../components/scrolltotop"
+import { FaAngleLeft, FaAngleRight, FaArrowLeft } from "react-icons/fa"
+import { PiPassword } from "react-icons/pi"
+import { BiChat, BiUpload } from "react-icons/bi"
+import { TbLockPassword, TbUpload } from "react-icons/tb"
+import { BsChat } from "react-icons/bs"
+
+const SecurityPage = () => {
+  const navigate = useNavigate()
+  const style = `bg-white flex justify-between items-center p-3 dark:bg-neutral-800`
+  const topStyle = `bg-white flex justify-between items-center p-3 rounded-t-xl dark:bg-neutral-800`
+  const bottomStyle = `bg-white flex justify-between items-center p-3 rounded-b-xl dark:bg-neutral-800`
+
+  const routes = [
+    { id: 1, title: `Change 4-digit PIN`, path: `/login`, icon: <TbLockPassword className="text-xl" /> },
+    { id: 2, title: `File reports / upload proof`, path: `/login`, icon: <TbUpload className="text-xl" /> },
+    { id: 3, title: `Chat with SecOps`, path: `/login`, icon: <BsChat className="text-xl" /> }
+  ]
+
+  return (
+    <main className="bg-white min-h-screen dark:bg-neutral-900 dark:text-white">
+      <Scrolltotop />
+      <button onClick={() => { navigate(-1) }} className="fixed top-5 left-5 z-20 cursor-pointer">
+        <FaArrowLeft className="text-xl" />
+      </button>
+      <div className="bg-white sticky top-0 flex justify-center py-4 z-10 dark:bg-neutral-800">
+        <span className="text-lg font-bold">Security & Support</span>
+      </div>
+      <div className="bg-neutral-200 py-10 px-4 rounded-xl h-screen dark:bg-neutral-900">
+        {routes.map(route => (
+          <Link key={route.id} to={route.path} className={route.id === 1 ? topStyle : route.id === 3 ? bottomStyle : style}>
+            <div className="flex items-center gap-3">
+              {route.icon}
+              {route.title}
+            </div>
+            <FaAngleRight className="text-lg" />
+          </Link>
+        ))}
+      </div>
+    </main>
+  )
+}
+
+export default SecurityPage
+
+====================================================================================================
+📁 FOLDER: src/pages
+📄 FILE: sellerPage.jsx
+📌 PATH: src/pages/sellerPage.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 3.3 KB
+====================================================================================================
+
+import { Link, NavLink, Outlet, useNavigate } from "react-router"
+import Scrolltotop from "../components/scrolltotop"
+import { FaAngleLeft, FaArrowLeft, FaEye, FaStar } from "react-icons/fa"
+import { MdPerson, MdVerified } from "react-icons/md"
+import { BsChat } from "react-icons/bs"
+import image from "../assets/profile_image.png"
+import { useState } from "react"
+import { product_list, video_list } from "../assets/assets"
+import Products from "../components/products"
+import Reels from "../components/reels"
+import Stores from "../components/stores"
+
+const SellerPage = () => {
+  const navigate = useNavigate()
+  const [id, setId] = useState(1)
+  const [following, setFollowing] = useState(false)
+
+  const routes = [
+    { id: 1, title: `Products`, path: `/seller` },
+    { id: 2, title: `Reels`, path: `reels` },
+    { id: 3, title: `Stores`, path: `stores` }
+  ]
+
+  const data = [
+    { id: 1, title: `Posts`, value: 86 },
+    { id: 2, title: `Followers`, value: 320 },
+    { id: 3, title: `Following`, value: 64 }
+  ]
+
+  return (
+    <main className="bg-white min-h-screen dark:bg-neutral-900 dark:text-white">
+      <Scrolltotop />
+      <button onClick={() => { navigate(-1) }} className="fixed top-5 left-5 z-20 cursor-pointer">
+        <FaArrowLeft className="text-xl" />
+      </button>
+      <div className="bg-white sticky top-0 flex justify-center items-center h-[10vh] z-10 dark:bg-neutral-800">
+        <span className="text-lg font-bold">Seller's Profile</span>
+      </div>
+      <div className="flex flex-col items-center gap-5 py-5">
+        <div className="flex flex-col items-center">
+          <img src={image} alt="" className="w-25" />
+          <p className="text-xl font-bold">Jenny Wilson</p>
+          <p className="flex items-center gap-2">High ranking seller <MdVerified className="text-blue-400 text-lg" /></p>
+        </div>
+        <div className="flex gap-10">
+          {data.map(info => (
+            <p key={info.id} className="flex flex-col items-center leading-tight">
+              <span>{info.value}</span>
+              <span>{info.title}</span>
+            </p>
+          ))}
+        </div>
+        <div className="flex justify-center items-center gap-5 w-full">
+          <button onClick={() => { setFollowing(previous => !previous) }} className={`${following ? 'bg-neutral-800' : 'bg-gradient-to-r from-orange-600 to-orange-400'} text-white w-2/5 flex justify-center items-center gap-2 px-4 py-1 rounded-full cursor-pointer`}>
+            <MdPerson className="text-2xl" /> { following ? `Following` : `Follow` }
+          </button>
+          <button className="bg-white text-neutral-900 border border-neutral-800 w-2/5 flex justify-center items-center gap-2 px-4 py-1 rounded-full cursor-pointer dark:border-none">
+            <BsChat className="text-xl" /> Message
+          </button>
+        </div>
+      </div>
+      <div className="bg-neutral-200 dark:bg-neutral-900">
+        <div className="bg-white sticky top-[10vh] flex justify-between items-center gap-4 px-4 z-10 dark:bg-neutral-900">
+          {routes.map(route => (
+            <NavLink key={route.id} to={route.path} end className={({ isActive }) => `w-1/3 py-4 text-center ${isActive && 'border-b-2 border-b-orange-400'}`}>{route.title}</NavLink>
+          ))}
+        </div>
+        <Outlet />
+      </div>
+    </main>
+  )
+}
+
+export default SellerPage
+
+====================================================================================================
+📁 FOLDER: src/pages
+📄 FILE: settingsPage.jsx
+📌 PATH: src/pages/settingsPage.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 2.3 KB
+====================================================================================================
+
+import { Link, useNavigate } from "react-router"
+import Scrolltotop from "../components/scrolltotop"
+import { FaAngleLeft, FaAngleRight, FaArrowLeft, FaMoon } from "react-icons/fa"
+import { BsToggleOff, BsToggleOn } from "react-icons/bs"
+import { useContext, useState } from "react"
+import { MdDelete, MdPrivacyTip } from "react-icons/md"
+import { GrSystem } from "react-icons/gr"
+import { themeContext } from "../context/themeContext"
+
+const SettingsPage = () => {
+  const navigate = useNavigate()
+  const  { darkMode, toggleDarkMode } = useContext(themeContext)
+
+  const routes = [
+    { id: 1, title: `App version / privacy`, path: `/login`, icon: <MdPrivacyTip className="text-lg" /> },
+    { id: 2, title: `Delete account`, path: `/login`, icon: <MdDelete className="text-xl text-red-600" /> }
+  ]
+
+  return (
+    <main className="bg-white min-h-screen dark:bg-neutral-900 dark:text-white">
+      <Scrolltotop />
+      <button onClick={() => { navigate(-1) }} className="fixed top-5 left-5 z-20 cursor-pointer">
+        <FaArrowLeft className="text-xl" />
+      </button>
+      <div className="bg-white sticky top-0 flex justify-center py-4 z-10 dark:bg-neutral-800">
+        <span className="text-lg font-bold">System Settings</span>
+      </div>
+      <div className="bg-neutral-200 py-10 px-4 h-screen dark:bg-neutral-900">
+        <div className="bg-white flex justify-between items-center p-3 rounded-t-xl dark:bg-neutral-800">
+          <div className="flex items-center gap-3">
+           <FaMoon className="text-lg" />
+           <span>Dark mode</span>
+          </div>
+          <button onClick={toggleDarkMode} className="cursor-pointer">
+            { darkMode ? <BsToggleOn className="text-xl" /> : <BsToggleOff className="text-xl" /> }
+          </button>
+        </div>
+        {routes.map(route => (
+          <Link key={route.id} to={route.path} className={`bg-white flex justify-between items-center p-3 dark:bg-neutral-800 ${route.id === 2 && 'rounded-b-xl'}`}>
+            <div className="flex items-center gap-3">
+              {route.icon}
+              <span className={route.id === 2 && `text-red-600`}>{route.title}</span>
+            </div>
+            <FaAngleRight className={`${route.id === 2 ? 'text-red-600 text-lg' : 'text-lg'}`} />
+          </Link>
+        ))}
+      </div>
+    </main>
+  )
+}
+
+export default SettingsPage
+
+====================================================================================================
+📁 FOLDER: src/pages
+📄 FILE: videoPage.jsx
+📌 PATH: src/pages/videoPage.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 992.0 B
+====================================================================================================
+
+// import { useState } from "react"
+// import { video_list } from "../assets/assets"
+// import VideoPlayer from "../components/videoPlayer"
+// import { useNavigate, useParams } from "react-router"
+// import { FaAngleLeft, FaArrowLeft } from "react-icons/fa"
+// import Scrolltotop from "../components/scrolltotop"
+
+// const VideoPage = () => {
+//   const { id } = useParams()
+//   const navigate = useNavigate()
+//   const [muted, setMuted] = useState(true)
+//   const video = video_list.find(video => video._id === id)
+
+//   return (
+//     <main className="bg-neutral-900 h-screen overflow-y-scroll">
+//       <Scrolltotop />
+//       <button onClick={() => { navigate(-1) }} className="bg-neutral-900 rounded-full absolute p-2 top-5 left-5 z-10 cursor-pointer">
+//         <FaArrowLeft className="text-white text-2xl" />
+//       </button>
+//       <VideoPlayer src={video.video} videoData={video} muted={muted} setMuted={setMuted} />
+//     </main>
+//   )
+// }
+
+// export default VideoPage
+
+====================================================================================================
+📁 FOLDER: src/pages
+📄 FILE: videosPage.jsx
+📌 PATH: src/pages/videosPage.jsx
+📝 EXTENSION: .jsx
+📦 SIZE: 6.3 KB
+====================================================================================================
+
+//import { useEffect, useRef, useState } from "react";
+// import VideoCard from "../../components/video/VideoCard";
+
+import { useState } from "react"
+import { video_list } from "../assets/assets"
+import VideoActions from "../components/videoActions"
+import VideoInfo from "../components/videoInfo"
+import VideoPlayer from "../components/videoPlayer"
+import { Link, useNavigate } from "react-router"
+
+import { FaAngleLeft, FaArrowLeft } from "react-icons/fa"
+import Scrolltotop from "../components/scrolltotop"
+
+const VideosPage = () => {
+  const navigate = useNavigate()
+  const [muted, setMuted] = useState(true)
+
+  return (
+    <main className="bg-neutral-900 h-screen overflow-y-scroll snap-y snap-mandatory">
+      <Scrolltotop />
+      <button onClick={() => { navigate(-1) }} className="bg-neutral-900/30 rounded-full absolute p-2 top-5 left-5 z-10 cursor-pointer">
+        <FaArrowLeft className="text-white text-2xl" />
+      </button>
+      {video_list.map((video) => (
+        <article key={video._id} className="relative h-screen overflow-hidden snap-start">
+          <VideoPlayer src={video.video} videoData={video} muted={muted} setMuted={setMuted} />
+          {/* <VideoActions video={video} /> */}
+          {/* <VideoInfo video={video} /> */}
+        </article>
+      ))}
+      {/* <div ref={loadMoreRef} /> */}
+    </main>
+  )
+}
+
+export default VideosPage
+
+//const VideosPage = () => {
+//   const [videos, setVideos] = useState([]);
+//   const [page, setPage] = useState(1);
+//   const [loading, setLoading] = useState(false);
+
+//   const loadMoreRef = useRef(null);
+
+//   useEffect(() => {
+//     async function fetchVideos() {
+//       try {
+//         setLoading(true);
+
+//         const response = await fetch(
+//           `/api/videos?page=${page}&limit=10`
+//         );
+
+//         const data = await response.json();
+
+//         setVideos((previous) => [
+//           ...previous,
+//           ...data.videos,
+//         ]);
+//       } catch (error) {
+//         console.error(error);
+//       } finally {
+//         setLoading(false);
+//       }
+//     }
+
+//     fetchVideos();
+//   }, [page]);
+
+//   useEffect(() => {
+//     const observer = new IntersectionObserver(
+//       (entries) => {
+//         if (entries[0].isIntersecting) {
+//           setPage((prev) => prev + 1);
+//         }
+//       },
+//       {
+//         threshold: 0.1,
+//       }
+//     );
+
+//     if (loadMoreRef.current) {
+//       observer.observe(loadMoreRef.current);
+//     }
+
+//     return () => observer.disconnect();
+//   }, []);
+
+//   return (
+//     <main className="video-feed">
+//         sample
+//       {/* {loading && <p>Loading...</p>}
+
+//       {videos.map((video) => (
+//         <VideoCard
+//           key={video._id}
+//           video={video}
+//         />
+//       ))}
+
+//       <div ref={loadMoreRef} /> */}
+//     </main>
+//   )
+// }
+
+// export default VideosPage
+
+
+
+
+
+// import VideoPlayer from "./VideoPlayer";
+// import VideoActions from "./VideoActions";
+// import VideoInfo from "./VideoInfo";
+
+// export default function VideoCard({ video }) {
+//   return (
+//     <article className="video-card">
+
+//       <VideoPlayer
+//         src={video.videoUrl}
+//       />
+
+//       <VideoActions
+//         video={video}
+//       />
+
+//       <VideoInfo
+//         video={video}
+//       />
+
+//     </article>
+//   );
+// }
+
+
+
+
+
+// import { useEffect, useRef, useState } from "react";
+
+// export default function VideoPlayer({ src }) {
+//   const videoRef = useRef(null);
+//   const [muted, setMuted] = useState(true);
+  
+//   const video = videoRef.current;
+
+//   const toggleMute = () => {
+//     video.muted = !video.muted;
+//     setMuted(video.muted);
+//   };
+
+//   useEffect(() => {
+//     const observer = new IntersectionObserver(
+//       ([entry]) => {
+//         if (entry.isIntersecting) {
+//           video.play().catch(() => {});
+//         } else {
+//           video.pause();
+//         }
+//       },
+//       {
+//         threshold: 0.7,
+//       }
+//     );
+
+//     observer.observe(video);
+
+//     return () => {
+//       observer.disconnect();
+//     };
+//   }, []);
+
+//   return (
+//     <div className="video-player">
+
+//       <video
+//         ref={videoRef}
+//         src={src}
+//         muted={muted}
+//         loop
+//         playsInline
+//         preload="metadata"
+//         className="video"
+//       />
+
+//       <button onClick={toggleMute}>
+//         {muted ? "🔇" : "🔊"}
+//       </button>
+
+//     </div>
+//   );
+// }
+
+
+
+
+
+
+// export default function VideoInfo({ video }) {
+//   return (
+//     <div className="video-info">
+
+//       <div className="user">
+//         <img
+//           src={video.user.avatar}
+//           alt=""
+//         />
+
+//         <strong>
+//           @{video.user.username}
+//         </strong>
+
+//         <button>
+//           Follow
+//         </button>
+//       </div>
+
+//       <p>
+//         {video.caption}
+//       </p>
+
+//       <div>
+//         {video.hashtags?.map((tag) => (
+//           <span key={tag}>
+//             #{tag}{" "}
+//           </span>
+//         ))}
+//       </div>
+
+//     </div>
+//   );
+// }
+
+
+
+
+
+
+
+
+// export default function VideoActions({ video }) {
+//   return (
+//     <div className="video-actions">
+
+//       <button>
+//         ❤️
+//         <span>{video.likes.length}</span>
+//       </button>
+
+//       <button>
+//         💬
+//         <span>{video.commentsCount}</span>
+//       </button>
+
+//       <button>
+//         ↗️
+//         <span>Share</span>
+//       </button>
+
+//       <button>
+//         🔖
+//         <span>Save</span>
+//       </button>
+
+//     </div>
+//   );
+// }
+
+
+
+
+
+
+
+// .video-feed {
+//   height: 100vh;
+//   overflow-y: scroll;
+
+//   scroll-snap-type: y mandatory;
+
+//   background: #000;
+// }
+
+// .video-card {
+//   position: relative;
+
+//   height: 100vh;
+
+//   scroll-snap-align: start;
+
+//   overflow: hidden;
+// }
+
+
+
+
+// .video-player {
+//   position: absolute;
+
+//   inset: 0;
+// }
+
+// .video {
+//   width: 100%;
+//   height: 100%;
+
+//   object-fit: cover;
+// }
+
+
+
+// .video-actions {
+//   position: absolute;
+
+//   right: 20px;
+//   bottom: 120px;
+
+//   display: flex;
+//   flex-direction: column;
+
+//   gap: 20px;
+
+//   z-index: 10;
+// }
+
+// .video-actions button {
+//   background: none;
+//   border: none;
+//   color: white;
+
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+
+//   cursor: pointer;
+// }
+
