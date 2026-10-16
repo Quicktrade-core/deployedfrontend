@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Header from "../components/header";
 import ProductCard from "../components/productCard";
 import Marquee from "react-fast-marquee";
+import { useProducts } from "../hooks/useProducts";
 
 import bagImg from "../assets/bag.jpg";
 import carImg from "../assets/car.jpg";
@@ -31,11 +32,10 @@ const CATEGORY_FALLBACK = {
 
 const HomePage = () => {
   const [categories, setCategories] = useState([]);
-  const [products, setProducts] = useState([]);
   const [selectedSlug, setSelectedSlug] = useState("all");
   const [catLoading, setCatLoading] = useState(true);
-  const [prodLoading, setProdLoading] = useState(true);
-  const [prodError, setProdError] = useState("");
+
+  const { products, total, loading, hasMore, error } = useProducts(selectedSlug, "all");
 
   useEffect(() => {
     let cancelled = false;
@@ -58,28 +58,6 @@ const HomePage = () => {
     })();
     return () => { cancelled = true; };
   }, []);
-
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      setProdLoading(true); setProdError("");
-      try {
-        const url = selectedSlug && selectedSlug !== "all"
-          ? `${API_BASE}/marketplace/listings/?category=${encodeURIComponent(selectedSlug)}`
-          : `${API_BASE}/marketplace/listings/`;
-        const res = await fetch(url);
-        const data = await res.json();
-        if (cancelled) return;
-        if (data?.success) setProducts(data.listings || []);
-        else setProdError(data?.error || "Failed to load products");
-      } catch (err) {
-        if (!cancelled) setProdError("Network error loading products");
-      } finally {
-        if (!cancelled) setProdLoading(false);
-      }
-    })();
-    return () => { cancelled = true; };
-  }, [selectedSlug]);
 
   const info = [
     "Nationwide delivery", "10% off your first order", "Secure payment",
@@ -142,14 +120,32 @@ const HomePage = () => {
           </div>
 
           <div className="flex flex-wrap justify-center gap-5 mb-20">
-            {prodLoading && <p className="text-neutral-500">Loading products…</p>}
-            {!prodLoading && prodError && <p className="text-red-500">{prodError}</p>}
-            {!prodLoading && !prodError && products.length === 0 && (
+            {loading && products.length === 0 && Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="w-38 h-44 rounded-lg bg-neutral-200 dark:bg-neutral-800 animate-pulse" />
+            ))}
+
+            {error && <p className="text-red-500">{error}</p>}
+
+            {!loading && !error && products.length === 0 && (
               <p className="text-neutral-500">No products in this category yet.</p>
             )}
-            {!prodLoading && products.map((item) => (
+
+            {products.map((item) => (
               <ProductCard key={item.id} item={item} />
             ))}
+
+            {hasMore && (
+              <div className="w-full flex justify-center py-4">
+                <p className="text-sm text-neutral-500">
+                  Loaded {products.length} of {total}… fetching more in the background
+                </p>
+              </div>
+            )}
+            {!hasMore && products.length > 0 && (
+              <div className="w-full flex justify-center py-4">
+                <p className="text-xs text-neutral-400">All {total} products loaded</p>
+              </div>
+            )}
           </div>
         </div>
       </main>
